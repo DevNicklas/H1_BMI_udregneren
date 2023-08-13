@@ -22,7 +22,10 @@ namespace BMI_udregneren
 
                 // Calculating BMI and rounds to 1 decimal
                 double bmi = Math.Round(weight / (Math.Pow(height, 2)), 1);
-                Console.WriteLine("Your BMI is " + bmi + "\n\nPress R for calculating a new BMI, or any other key for closing the program");
+                Console.WriteLine("Your BMI is " + bmi);
+                WriteGroup(bmi);
+
+                Console.WriteLine("\nPress R for calculating a new BMI, or any other key for closing the program");
             } while (Console.ReadKey().Key == ConsoleKey.R);
         }
 
@@ -42,6 +45,58 @@ namespace BMI_udregneren
                 Console.WriteLine(text);
             } while (!float.TryParse(Console.ReadLine(), out userInput));
             return userInput;
+        }
+
+        /// <summary>
+        /// Writes the specific group which fits to the bmi <paramref name="bmi"/>
+        /// </summary>
+        /// <param name="bmi">bmi of the user</param>
+        static void WriteGroup(double bmi)
+        {
+            // Body weight dificit (Blue area)
+            if(bmi > 18.5)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.WriteLine("You are in the group: Body weight deficit");
+            }
+
+            // Normal body weight (Dark green area)
+            else if(bmi > 24)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGreen;
+                Console.WriteLine("You are in the group: Normal body weight");
+            }
+
+            // Weight over (Light green area)
+            else if (bmi > 30)
+            {
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("You are in the group: Weight over");
+            }
+
+            // Obesity first degree (Yellow area)
+            else if (bmi > 35)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("You are in the group: Obesity first degree");
+            }
+
+            // Obesity second degree (Orange area)
+            else if (bmi > 40)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
+                Console.WriteLine("You are in the group: Obesity second degree");
+            }
+
+            // Obesity third degree (Dark red area)
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("You are in the group: Obesity third degree");
+            }
+
+            // Resets color
+            Console.ResetColor();
         }
     }
 }
